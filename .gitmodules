@@ -1,0 +1,6 @@
+[submodule "External/googletest"]
+	path = External/googletest
+	url = https://github.com/google/googletest.git
+[submodule "External/cryptopp-cmake"]
+	path = External/cryptopp-cmake
+	url = https://github.com/abdes/cryptopp-cmake.git
