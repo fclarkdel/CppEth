@@ -1,6 +1,5 @@
 add_executable(
     ${TESTS_NAME}
-
     AbiTest.cpp
     FormatTest.cpp
     HexTest.cpp
@@ -15,9 +14,7 @@ endif()
 
 target_link_libraries(
     ${TESTS_NAME}
-
     PRIVATE
-
     ${SOURCE_NAME}
     gmock_main
 )

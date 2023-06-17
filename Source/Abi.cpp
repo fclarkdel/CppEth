@@ -1,7 +1,7 @@
-#include "Abi.hpp"
+#include <SolidityContractInterface/Abi.hpp>
 
-#include "Hex.hpp"
-#include "Keccak.hpp"
+#include <SolidityContractInterface/Hex.hpp>
+#include <SolidityContractInterface/Keccak.hpp>
 
 namespace SolidityContractInterface::Abi::Implementation {
     template<>

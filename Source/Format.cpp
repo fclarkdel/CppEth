@@ -1,4 +1,4 @@
-#include "Format.hpp"
+#include <SolidityContractInterface/Format.hpp>
 
 namespace SolidityContractInterface::Format {
     namespace Implementation {

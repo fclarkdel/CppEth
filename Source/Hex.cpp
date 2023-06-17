@@ -1,4 +1,4 @@
-#include "Hex.hpp"
+#include <SolidityContractInterface/Hex.hpp>
 
 namespace SolidityContractInterface::Hex::Implementation{
     unsigned int hexCharToDecUnsignedInt(char hexDigit) {

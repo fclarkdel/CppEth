@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 3.25)
 
 project(SolidityContractInterface)
 
-set(CMAKE_CXX_STANDARD 23)
-
+set(
+    CMAKE_CXX_STANDARD
+    23
+)
 # Project variables.
 set(
     SOURCE_NAME
@@ -23,19 +25,14 @@ set(
 )
 set(
     INCLUDE_DIRECTORY
-    ${PROJECT_SOURCE_DIR}/Include/Implementation/
+    ${PROJECT_SOURCE_DIR}/Include/
 )
-add_subdirectory(
-    Source
-    Build/Source
-)
+add_subdirectory(Source)
+
 # Tests should only be included
 # when this is the top level project.
 if(PROJECT_IS_TOP_LEVEL)
-    add_subdirectory(
-            Tests
-            Build/Tests
-    )
+    add_subdirectory(Tests)
     enable_testing()
 endif()
 
@@ -43,10 +40,9 @@ endif()
 add_library(
     ${PROJECT_NAME}
     INTERFACE
-    Include/Public/SolidityContractInterface.hpp
 )
 target_include_directories(
     ${PROJECT_NAME}
     INTERFACE
-    Include/Public/SolidityContractInterface
+    ${INCLUDE_DIRECTORY}
 )

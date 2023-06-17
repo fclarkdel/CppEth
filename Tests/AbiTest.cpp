@@ -1,7 +1,7 @@
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
-#include "Abi.hpp"
-#include "Types.hpp"
+#include <SolidityContractInterface/Abi.hpp>
+#include <SolidityContractInterface/Types.hpp>
 
 using namespace SolidityContractInterface;
 

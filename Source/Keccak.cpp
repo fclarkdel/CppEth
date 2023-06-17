@@ -1,8 +1,8 @@
-#include "Keccak.hpp"
+#include <SolidityContractInterface/Keccak.hpp>
 
-#include "cryptopp/filters.h"
-#include "cryptopp/hex.h"
-#include "cryptopp/keccak.h"
+#include <cryptopp/filters.h>
+#include <cryptopp/hex.h>
+#include <cryptopp/keccak.h>
 
 namespace SolidityContractInterface::Keccak {
     std::string keccak256(std::string toHash) {
