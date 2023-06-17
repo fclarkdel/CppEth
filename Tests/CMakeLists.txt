@@ -6,10 +6,13 @@ add_executable(
     HexTest.cpp
     KeccakTest.cpp
 )
-add_subdirectory(
-    ${EXTERNAL_DIRECTORY}googletest
-    ${EXTERNAL_DIRECTORY}googletest/Build
-)
+if(NOT TARGET gmock_main)
+    add_subdirectory(
+        ${EXTERNAL_DIRECTORY}googletest
+        ${EXTERNAL_BUILD_DIRECTORY}googletest
+    )
+endif()
+
 target_link_libraries(
     ${TESTS_NAME}
 

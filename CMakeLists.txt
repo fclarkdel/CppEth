@@ -18,21 +18,35 @@ set(
     ${PROJECT_SOURCE_DIR}/External/
 )
 set(
-    INCLUDE_DIRECTORY
-    ${PROJECT_SOURCE_DIR}/Include/
+    EXTERNAL_BUILD_DIRECTORY
+    ${PROJECT_BINARY_DIR}/External/
 )
 set(
-    TESTS_DIRECTORY
-    ${PROJECT_SOURCE_DIR}/Tests/
+    INCLUDE_DIRECTORY
+    ${PROJECT_SOURCE_DIR}/Include/Implementation/
 )
-add_subdirectory(Source)
-
+add_subdirectory(
+    Source
+    Build/Source
+)
 # Tests should only be included
 # when this is the top level project.
 if(PROJECT_IS_TOP_LEVEL)
     add_subdirectory(
-        ${TESTS_DIRECTORY}
-        ${TESTS_DIRECTORY}Build
+            Tests
+            Build/Tests
     )
     enable_testing()
 endif()
+
+# Library implementors target this.
+add_library(
+    ${PROJECT_NAME}
+    INTERFACE
+    Include/Public/SolidityContractInterface.hpp
+)
+target_include_directories(
+    ${PROJECT_NAME}
+    INTERFACE
+    Include/Public/SolidityContractInterface
+)

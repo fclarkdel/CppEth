@@ -12,14 +12,20 @@ add_library(
     Hex.cpp
     Keccak.cpp
 )
-add_subdirectory(
-    ${EXTERNAL_DIRECTORY}cryptopp-cmake
-    ${EXTERNAL_DIRECTORY}cryptopp-cmake/Build
-)
-add_subdirectory(
-    ${EXTERNAL_DIRECTORY}multiprecision-Boost_1_82_0
-    ${EXTERNAL_DIRECTORY}multiprecision-Boost_1_82_0/Build
-)
+if(NOT TARGET Boost::multiprecision)
+    add_subdirectory(
+            ${EXTERNAL_DIRECTORY}multiprecision-Boost_1_82_0
+            ${EXTERNAL_BUILD_DIRECTORY}multiprecision-Boost_1_82_0
+    )
+endif()
+
+if(NOT TARGET cryptopp)
+    add_subdirectory(
+        ${EXTERNAL_DIRECTORY}cryptopp-cmake
+        ${EXTERNAL_BUILD_DIRECTORY}cryptopp-cmake
+    )
+endif()
+
 target_link_libraries(
     ${SOURCE_NAME}
 
