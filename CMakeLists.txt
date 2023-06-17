@@ -4,8 +4,35 @@ project(SolidityContractInterface)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_subdirectory(External/cryptopp-cmake)
-add_subdirectory(External/googletest)
-add_subdirectory(External/multiprecision-Boost_1_82_0)
+# Project variables.
+set(
+    SOURCE_NAME
+    ${PROJECT_NAME}_Source
+)
+set(
+    TESTS_NAME
+    ${PROJECT_NAME}_Tests
+)
+set(
+    EXTERNAL_DIRECTORY
+    ${PROJECT_SOURCE_DIR}/External/
+)
+set(
+    INCLUDE_DIRECTORY
+    ${PROJECT_SOURCE_DIR}/Include/
+)
+set(
+    TESTS_DIRECTORY
+    ${PROJECT_SOURCE_DIR}/Tests/
+)
 add_subdirectory(Source)
-add_subdirectory(Tests)
+
+# Tests should only be included
+# when this is the top level project.
+if(PROJECT_IS_TOP_LEVEL)
+    add_subdirectory(
+        ${TESTS_DIRECTORY}
+        ${TESTS_DIRECTORY}Build
+    )
+    enable_testing()
+endif()

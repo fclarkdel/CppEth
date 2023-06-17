@@ -1,13 +1,5 @@
-set(
-    INCLUDE_DIRECTORY
-    ../Include/
-)
-set(
-    EXTERNAL_DIRECTORY
-    ../External/
-)
 add_library(
-    Source
+    ${SOURCE_NAME}
 
     ${INCLUDE_DIRECTORY}Abi.hpp
     ${INCLUDE_DIRECTORY}Format.hpp
@@ -20,20 +12,26 @@ add_library(
     Hex.cpp
     Keccak.cpp
 )
+add_subdirectory(
+    ${EXTERNAL_DIRECTORY}cryptopp-cmake
+    ${EXTERNAL_DIRECTORY}cryptopp-cmake/Build
+)
+add_subdirectory(
+    ${EXTERNAL_DIRECTORY}multiprecision-Boost_1_82_0
+    ${EXTERNAL_DIRECTORY}multiprecision-Boost_1_82_0/Build
+)
 target_link_libraries(
-    Source
+    ${SOURCE_NAME}
 
     PUBLIC
 
-    boost_multiprecision
+    Boost::multiprecision
     cryptopp
 )
 target_include_directories(
-    Source
+    ${SOURCE_NAME}
 
     PUBLIC
 
     ${INCLUDE_DIRECTORY}
-
-    ${EXTERNAL_DIRECTORY}multiprecision-Boost_1_82_0/include
 )
