@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "Format.hpp"
-#include "Types.hpp"
+#include <SolidityContractInterface/Format.hpp>
+#include <SolidityContractInterface/Types.hpp>
 
 namespace SolidityContractInterface::Hex {
     namespace Implementation {

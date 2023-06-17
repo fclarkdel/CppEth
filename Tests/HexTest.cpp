@@ -1,10 +1,10 @@
+#include <gtest/gtest.h>
+
 #include <limits>
 #include <type_traits>
 
-#include "gtest/gtest.h"
-
-#include "Types.hpp"
-#include "Hex.hpp"
+#include <SolidityContractInterface/Hex.hpp>
+#include <SolidityContractInterface/Types.hpp>
 
 using namespace SolidityContractInterface;
 

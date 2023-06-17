@@ -1,6 +1,6 @@
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
-#include "Format.hpp"
+#include <SolidityContractInterface/Format.hpp>
 
 using namespace SolidityContractInterface;
 
