@@ -1,9 +1,9 @@
 add_library(
     ${SOURCE_NAME}
-    Abi.cpp
-    Format.cpp
-    Hex.cpp
-    Keccak.cpp
+    CppEth/Abi/Abi.cpp
+    CppEth/Format/Format.cpp
+    CppEth/Hex/Hex.cpp
+    CppEth/Keccak/Keccak.cpp
 )
 if(NOT TARGET Boost::multiprecision)
     add_subdirectory(
@@ -28,5 +28,29 @@ target_link_libraries(
 target_include_directories(
     ${SOURCE_NAME}
     PUBLIC
-    ${INCLUDE_DIRECTORY}
+    ../Source
 )
+# Tests should only be included
+# when this is the top level project.
+if(PROJECT_IS_TOP_LEVEL)
+    add_executable(
+        ${TESTS_NAME}
+        CppEth/Abi/Abi.test.cpp
+        CppEth/Format/Format.test.cpp
+        CppEth/Hex/Hex.test.cpp
+        CppEth/Keccak/Keccak.test.cpp
+    )
+    if(NOT TARGET gmock_main)
+        add_subdirectory(
+            ${EXTERNAL_DIRECTORY}googletest
+            ${EXTERNAL_BUILD_DIRECTORY}googletest
+        )
+    endif()
+    target_link_libraries(
+        ${TESTS_NAME}
+        PRIVATE
+        ${SOURCE_NAME}
+        gmock_main
+    )
+    enable_testing()
+endif()

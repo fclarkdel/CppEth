@@ -3,10 +3,10 @@
 
 #include <string>
 
-#include <SolidityContractInterface/Format.hpp>
-#include <SolidityContractInterface/Types.hpp>
+#include <CppEth/Format/Format.hpp>
+#include <CppEth/Types/Types.hpp>
 
-namespace SolidityContractInterface::Hex {
+namespace CppEth::Hex {
     namespace Implementation {
         unsigned int hexCharToDecUnsignedInt(char hexDigit);
 

@@ -5,10 +5,10 @@
 #include <tuple>
 #include <stdexcept>
 
-#include <SolidityContractInterface/Format.hpp>
-#include <SolidityContractInterface/Types.hpp>
+#include <CppEth/Format/Format.hpp>
+#include <CppEth/Types/Types.hpp>
 
-namespace SolidityContractInterface::Abi {
+namespace CppEth::Abi {
     namespace Implementation {
         const size_t BYTES_IN_WORD = 32;
         const size_t HEX_DIGITS_IN_WORD = BYTES_IN_WORD * 2;

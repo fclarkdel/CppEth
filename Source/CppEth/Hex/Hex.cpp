@@ -1,6 +1,6 @@
-#include <SolidityContractInterface/Hex.hpp>
+#include <CppEth/Hex/Hex.hpp>
 
-namespace SolidityContractInterface::Hex::Implementation{
+namespace CppEth::Hex::Implementation{
     unsigned int hexCharToDecUnsignedInt(char hexDigit) {
         unsigned int digitValue = 0;
 

@@ -3,10 +3,10 @@
 #include <limits>
 #include <type_traits>
 
-#include <SolidityContractInterface/Hex.hpp>
-#include <SolidityContractInterface/Types.hpp>
+#include <CppEth/Hex/Hex.hpp>
+#include <CppEth/Types/Types.hpp>
 
-using namespace SolidityContractInterface;
+using namespace CppEth;
 
 TEST(Hex_decode, shouldBeCaseInsensitive) {
     const Types::string LOWERCASE_ENCODING = "4c6f72656d20697073756d2e";

@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace SolidityContractInterface::Keccak {
+namespace CppEth::Keccak {
     std::string keccak256(std::string toHash);
 }
 #endif

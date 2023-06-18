@@ -171,7 +171,7 @@ void calc_pi(T& result, unsigned digits)
    //
    // This algorithm is from:
    // Schonhage, A., Grotefeld, A. F. W., and Vetter, E. Fast Algorithms: A Multitape Turing
-   // Machine SolidityContractInterface. BI Wissenschaftverlag, 1994.
+   // Machine CppEth. BI Wissenschaftverlag, 1994.
    // Also described in MPFR's algorithm guide: http://www.mpfr.org/algorithms.pdf.
    //
    // Let:

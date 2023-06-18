@@ -1,10 +1,10 @@
-#include <SolidityContractInterface/Keccak.hpp>
+#include <CppEth/Keccak/Keccak.hpp>
 
 #include <cryptopp/filters.h>
 #include <cryptopp/hex.h>
 #include <cryptopp/keccak.h>
 
-namespace SolidityContractInterface::Keccak {
+namespace CppEth::Keccak {
     std::string keccak256(std::string toHash) {
         using namespace CryptoPP;
 

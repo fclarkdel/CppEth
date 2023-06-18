@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
-#include <SolidityContractInterface/Abi.hpp>
-#include <SolidityContractInterface/Types.hpp>
+#include <CppEth/Abi/Abi.hpp>
+#include <CppEth/Types/Types.hpp>
 
-using namespace SolidityContractInterface;
+using namespace CppEth;
 
 TEST(Abi_decode, shouldBePrefixInsensitive) {
     std::tuple expected = {Types::uint256(42), Types::int256(-42)};

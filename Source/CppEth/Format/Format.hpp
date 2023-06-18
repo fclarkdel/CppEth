@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace SolidityContractInterface::Format {
+namespace CppEth::Format {
     namespace Implementation {
         bool encodingHasPrefix(std::string_view encoding);
     }

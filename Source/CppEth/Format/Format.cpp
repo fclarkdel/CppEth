@@ -1,6 +1,6 @@
-#include <SolidityContractInterface/Format.hpp>
+#include <CppEth/Format/Format.hpp>
 
-namespace SolidityContractInterface::Format {
+namespace CppEth::Format {
     namespace Implementation {
         bool encodingHasPrefix(std::string_view encoding) {
             return encoding.substr(0, 2) == "0x" || encoding.substr(0, 2) == "0X";

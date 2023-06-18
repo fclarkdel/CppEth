@@ -1,9 +1,9 @@
-#include <SolidityContractInterface/Abi.hpp>
+#include <CppEth/Abi/Abi.hpp>
 
-#include <SolidityContractInterface/Hex.hpp>
-#include <SolidityContractInterface/Keccak.hpp>
+#include <CppEth/Hex/Hex.hpp>
+#include <CppEth/Keccak/Keccak.hpp>
 
-namespace SolidityContractInterface::Abi::Implementation {
+namespace CppEth::Abi::Implementation {
     template<>
     std::tuple<Types::uint256> decodeElement(size_t index, std::string_view encoding) {
         return std::tuple{Hex::decode<Types::uint256>(encoding.substr(index * HEX_DIGITS_IN_WORD, HEX_DIGITS_IN_WORD))};

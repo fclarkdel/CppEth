@@ -5,7 +5,7 @@
 
 #include <boost/multiprecision/cpp_int.hpp>
 
-namespace SolidityContractInterface::Types{
+namespace CppEth::Types{
     using uint256 = boost::multiprecision::number<boost::multiprecision::cpp_int_backend<256, 256, boost::multiprecision::unsigned_magnitude, boost::multiprecision::checked, void>>;
 
     using int256 = boost::multiprecision::number<boost::multiprecision::cpp_int_backend<256, 256, boost::multiprecision::signed_magnitude, boost::multiprecision::checked, void>>;

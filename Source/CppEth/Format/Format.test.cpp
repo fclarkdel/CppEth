@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
-#include <SolidityContractInterface/Format.hpp>
+#include <CppEth/Format/Format.hpp>
 
-using namespace SolidityContractInterface;
+using namespace CppEth;
 
 TEST(Format_trimPrefixIfPresent, shouldTrimPrefix) {
     const std::string UNPREFIXED = "4c6f72656d20697073756d2e";
