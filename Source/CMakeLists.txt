@@ -1,6 +1,7 @@
 add_library(
     ${SOURCE_NAME}
     CppEth/Abi/Abi.cpp
+    CppEth/Client/Client.cpp
     CppEth/Format/Format.cpp
     CppEth/Hex/Hex.cpp
     CppEth/Keccak/Keccak.cpp
@@ -19,11 +20,19 @@ if(NOT TARGET cryptopp)
     )
 endif()
 
+if(NOT TARGET libcurl)
+    add_subdirectory(
+        ${EXTERNAL_DIRECTORY}curl
+        ${EXTERNAL_BUILD_DIRECTORY}scurl
+    )
+endif()
+
 target_link_libraries(
     ${SOURCE_NAME}
     PUBLIC
     Boost::multiprecision
     cryptopp
+    libcurl
 )
 target_include_directories(
     ${SOURCE_NAME}
@@ -36,6 +45,7 @@ if(PROJECT_IS_TOP_LEVEL)
     add_executable(
         ${TESTS_NAME}
         CppEth/Abi/Abi.test.cpp
+        CppEth/Client/Client.test.cpp
         CppEth/Format/Format.test.cpp
         CppEth/Hex/Hex.test.cpp
         CppEth/Keccak/Keccak.test.cpp

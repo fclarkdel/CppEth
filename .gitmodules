@@ -4,3 +4,6 @@
 [submodule "External/cryptopp-cmake"]
 	path = External/cryptopp-cmake
 	url = https://github.com/abdes/cryptopp-cmake.git
+[submodule "External/curl"]
+	path = External/curl
+	url = https://github.com/curl/curl.git
