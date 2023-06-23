@@ -11,6 +11,7 @@ TEST(Client, asyncRequestsShouldBeFaster){
     const size_t NUM_REQUESTS = 200;
 
     // Async requests.
+    //
     struct timespec start{};
     struct timespec finish{};
 
