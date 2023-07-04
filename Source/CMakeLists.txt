@@ -1,41 +1,45 @@
 add_library(
-    ${SOURCE_NAME}
+    CppEth_Source
+
     CppEth/Abi/Abi.cpp
-    CppEth/Client/Client.cpp
     CppEth/Format/Format.cpp
     CppEth/Hex/Hex.cpp
     CppEth/Keccak/Keccak.cpp
+    CppEth/Node/Node.cpp
 )
-if(NOT TARGET Boost::multiprecision)
-    add_subdirectory(
-        ${EXTERNAL_DIRECTORY}multiprecision-Boost_1_82_0
-        ${EXTERNAL_BUILD_DIRECTORY}multiprecision-Boost_1_82_0
-    )
-endif()
+include(FetchContent)
 
-if(NOT TARGET cryptopp)
-    add_subdirectory(
-        ${EXTERNAL_DIRECTORY}cryptopp-cmake
-        ${EXTERNAL_BUILD_DIRECTORY}cryptopp-cmake
-    )
-endif()
-
-if(NOT TARGET libcurl)
-    add_subdirectory(
-        ${EXTERNAL_DIRECTORY}curl
-        ${EXTERNAL_BUILD_DIRECTORY}scurl
-    )
-endif()
+FetchContent_Declare(
+    boost-multiprecision
+    URL https://github.com/boostorg/multiprecision/archive/refs/tags/Boost_1_82_0.zip
+)
+FetchContent_Declare(
+    cryptopp
+    URL https://github.com/abdes/cryptopp-cmake/archive/refs/tags/CRYPTOPP_8_7_0_1.zip
+)
+FetchContent_Declare(
+    daw-json-link
+    URL https://github.com/beached/daw_json_link/archive/refs/tags/v3.17.2.zip
+)
+FetchContent_Declare(
+    LibJsonRpc
+    GIT_REPOSITORY https://github.com/fclarkdel/LibJsonRpc.git
+    GIT_TAG main
+)
+FetchContent_MakeAvailable(boost-multiprecision cryptopp daw-json-link LibJsonRpc)
 
 target_link_libraries(
-    ${SOURCE_NAME}
+    CppEth_Source
+
     PUBLIC
     Boost::multiprecision
     cryptopp
-    libcurl
+    daw::daw-json-link
+    LibJsonRpc
 )
 target_include_directories(
-    ${SOURCE_NAME}
+    CppEth_Source
+
     PUBLIC
     ../Source
 )
@@ -43,23 +47,25 @@ target_include_directories(
 # when this is the top level project.
 if(PROJECT_IS_TOP_LEVEL)
     add_executable(
-        ${TESTS_NAME}
+        CppEth_Tests
+
         CppEth/Abi/Abi.test.cpp
-        CppEth/Client/Client.test.cpp
         CppEth/Format/Format.test.cpp
         CppEth/Hex/Hex.test.cpp
         CppEth/Keccak/Keccak.test.cpp
+        CppEth/Node/Node.test.cpp
     )
-    if(NOT TARGET gmock_main)
-        add_subdirectory(
-            ${EXTERNAL_DIRECTORY}googletest
-            ${EXTERNAL_BUILD_DIRECTORY}googletest
-        )
-    endif()
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/refs/tags/v1.13.0.zip
+    )
+    FetchContent_MakeAvailable(googletest)
+
     target_link_libraries(
-        ${TESTS_NAME}
+        CppEth_Tests
+
         PRIVATE
-        ${SOURCE_NAME}
+        CppEth_Source
         gmock_main
     )
     enable_testing()
