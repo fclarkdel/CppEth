@@ -4,7 +4,7 @@
 #include <string>
 
 #include <CppEth/Format/Format.hpp>
-#include <CppEth/Types/Types.hpp>
+#include <CppEth/Types.hpp>
 
 namespace CppEth::Hex {
     namespace Implementation {
@@ -20,13 +20,13 @@ namespace CppEth::Hex {
         }
 
         template<>
-        Types::uint256 decodeElement(std::string_view encoding);
+        uint256 decodeElement(std::string_view encoding);
 
         template<>
-        Types::int256 decodeElement(std::string_view encoding);
+        int256 decodeElement(std::string_view encoding);
 
         template<>
-        Types::string decodeElement(std::string_view encoding);
+        string decodeElement(std::string_view encoding);
 
         template<typename Element>
         std::string encodeElement(Element element) {
@@ -36,13 +36,13 @@ namespace CppEth::Hex {
         }
 
         template<>
-        std::string encodeElement(Types::uint256 element);
+        std::string encodeElement(uint256 element);
 
         template<>
-        std::string encodeElement(Types::int256 element);
+        std::string encodeElement(int256 element);
 
         template<>
-        std::string encodeElement(Types::string element);
+        std::string encodeElement(string element);
     }
 
     template<typename Element>

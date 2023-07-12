@@ -88,10 +88,10 @@ namespace CppEth::Hex::Implementation{
     }
 
     template<>
-    Types::uint256 decodeElement(std::string_view encoding) {
+    uint256 decodeElement(std::string_view encoding) {
         // We are assuming big-endianness.
-        Types::uint256 digitValue = 0;
-        Types::uint256 accumulateValue = 0;
+        uint256 digitValue = 0;
+        uint256 accumulateValue = 0;
 
         // Work from the MSD to the LSD.
         for (size_t index = 0; index < encoding.size(); ++index) {
@@ -107,17 +107,17 @@ namespace CppEth::Hex::Implementation{
     }
 
     template<>
-    Types::int256 decodeElement(std::string_view encoding) {
+    int256 decodeElement(std::string_view encoding) {
         // We are assuming big-endianness,
         // and two's complement form.
 
         // Calculate the value
         // of the encoding
         // not including the MSD.
-        Types::int256 accumulateValue = decodeElement<Types::uint256>(encoding.substr(1, encoding.size() - 1));
+        int256 accumulateValue = decodeElement<uint256>(encoding.substr(1, encoding.size() - 1));
 
         // Grab the MSD.
-        Types::uint256 digitValue = hexCharToDecUnsignedInt(encoding.front());
+        uint256 digitValue = hexCharToDecUnsignedInt(encoding.front());
 
         // Go through the bits of the MSD,
         // from LSB to MSB in MSD.
@@ -129,7 +129,7 @@ namespace CppEth::Hex::Implementation{
         for (size_t index = 0; index < NUM_BITS_IN_HEX_DIGIT; ++index) {
             // Grab the value of the bit
             // from the digit.
-            Types::uint256 bitValue = digitValue % BIN_BASE;
+            uint256 bitValue = digitValue % BIN_BASE;
             digitValue /= BIN_BASE;
 
             // Raise bit to power
@@ -147,23 +147,23 @@ namespace CppEth::Hex::Implementation{
     }
 
     template<>
-    Types::string decodeElement(std::string_view encoding) {
+    string decodeElement(std::string_view encoding) {
         // Check for valid size.
         if (encoding.empty() || encoding.size() % 2)
             throw std::invalid_argument("Encoding size must be a non-zero positive multiple of two.");
 
         // Only works with
         // ASCII encoding for now.
-        Types::string ascii;
+        string ascii;
 
         for (size_t index = 0; index < encoding.size(); index += 2)
-            ascii += static_cast<char>(decodeElement<Types::uint256>(encoding.substr(index, 2)));
+            ascii += static_cast<char>(decodeElement<uint256>(encoding.substr(index, 2)));
 
         return ascii;
     }
 
     template<>
-    std::string encodeElement(Types::uint256 element) {
+    std::string encodeElement(uint256 element) {
         const size_t BASE_HEX = 16;
 
         std::string encoding;
@@ -179,10 +179,10 @@ namespace CppEth::Hex::Implementation{
     }
 
     template<>
-    std::string encodeElement(Types::int256 element) {
+    std::string encodeElement(int256 element) {
         // Encoding using two's complement.
         if (element > 0)
-            return encodeElement(static_cast<Types::uint256>(element));
+            return encodeElement(static_cast<uint256>(element));
 
         const size_t BASE_HEX = 16;
 
@@ -212,15 +212,15 @@ namespace CppEth::Hex::Implementation{
         // it just needs to be encoded to hex.
         temp = 1 << 4 * (numHexDigits);
 
-        return encodeElement(static_cast<Types::uint256>(temp - element));
+        return encodeElement(static_cast<uint256>(temp - element));
     }
 
     template<>
-    std::string encodeElement(Types::string element) {
+    std::string encodeElement(string element) {
         std::string encoding;
 
         for (char c: element)
-            encoding += encodeElement<Types::uint256>(c);
+            encoding += encodeElement<uint256>(c);
 
         return encoding;
     }

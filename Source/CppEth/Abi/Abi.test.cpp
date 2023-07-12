@@ -1,55 +1,55 @@
 #include <gtest/gtest.h>
 
 #include <CppEth/Abi/Abi.hpp>
-#include <CppEth/Types/Types.hpp>
+#include <CppEth/Types.hpp>
 
 using namespace CppEth;
 
 TEST(Abi_decode, shouldBePrefixInsensitive) {
-    std::tuple expected = {Types::uint256(42), Types::int256(-42)};
+    std::tuple expected = {uint256(42), int256(-42)};
 
     std::string unprefixedEncoding;
     unprefixedEncoding += "000000000000000000000000000000000000000000000000000000000000002a";
     unprefixedEncoding += "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd6";
 
-    std::tuple returned = Abi::decode<Types::uint256, Types::int256>(unprefixedEncoding);
+    std::tuple returned = Abi::decode<uint256, int256>(unprefixedEncoding);
 
     EXPECT_EQ(expected, returned);
 
     std::string prefixedEncoding = "0x" + unprefixedEncoding;
 
-    returned = Abi::decode<Types::uint256, Types::int256>(prefixedEncoding);
+    returned = Abi::decode<uint256, int256>(prefixedEncoding);
 
     EXPECT_EQ(expected, returned);
 }
 
 TEST(Abi_decode, shouldDecodeStaticTypes) {
-    std::tuple expected = {Types::uint256(42), Types::int256(-42)};
+    std::tuple expected = {uint256(42), int256(-42)};
 
     std::string encoding = "0x";
     encoding += "000000000000000000000000000000000000000000000000000000000000002a";
     encoding += "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd6";
 
-    std::tuple returned = Abi::decode<Types::uint256, Types::int256>(encoding);
+    std::tuple returned = Abi::decode<uint256, int256>(encoding);
 
     EXPECT_EQ(expected, returned);
 }
 
 TEST(Abi_decode, shouldDecodeDynamicTypes) {
-    std::tuple expected = {Types::string("Lorem ipsum.")};
+    std::tuple expected = {string("Lorem ipsum.")};
 
     std::string encoding = "0x";
     encoding += "0000000000000000000000000000000000000000000000000000000000000020";
     encoding += "000000000000000000000000000000000000000000000000000000000000000c";
     encoding += "4c6f72656d20697073756d2e0000000000000000000000000000000000000000";
 
-    std::tuple returned = Abi::decode<Types::string>(encoding);
+    std::tuple returned = Abi::decode<string>(encoding);
 
     EXPECT_EQ(expected, returned);
 }
 
 TEST(Abi_decode, shouldDecodeMixedTypes) {
-    std::tuple expected = {Types::uint256(42), Types::int256(-42), Types::string("Lorem ipsum.")};
+    std::tuple expected = {uint256(42), int256(-42), string("Lorem ipsum.")};
 
     std::string encoding = "0x";
     encoding += "000000000000000000000000000000000000000000000000000000000000002a";
@@ -58,7 +58,7 @@ TEST(Abi_decode, shouldDecodeMixedTypes) {
     encoding += "000000000000000000000000000000000000000000000000000000000000000c";
     encoding += "4c6f72656d20697073756d2e0000000000000000000000000000000000000000";
 
-    std::tuple returned = Abi::decode<Types::uint256, Types::int256, Types::string>(encoding);
+    std::tuple returned = Abi::decode<uint256, int256, string>(encoding);
 
     EXPECT_EQ(expected, returned);
 }
@@ -78,7 +78,7 @@ TEST(Abi_encode, shouldEncodeStaticTypes) {
     expected += "000000000000000000000000000000000000000000000000000000000000002a";
     expected += "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd6";
 
-    std::string returned = Abi::encode("function(uint256,int256)", Types::uint256(42), Types::int256(-42));
+    std::string returned = Abi::encode("function(uint256,int256)", uint256(42), int256(-42));
 
     EXPECT_EQ(expected, returned);
 }
@@ -90,7 +90,7 @@ TEST(Abi_encode, shouldEncodeDynamicTypes) {
     expected += "000000000000000000000000000000000000000000000000000000000000000c";
     expected += "4c6f72656d20697073756d2e0000000000000000000000000000000000000000";
 
-    std::string returned = Abi::encode("function(string)", Types::string("Lorem ipsum."));
+    std::string returned = Abi::encode("function(string)", string("Lorem ipsum."));
 
     EXPECT_EQ(expected, returned);
 }
@@ -104,8 +104,8 @@ TEST(Abi_encode, shouldEncodeMixedTypes) {
     expected += "000000000000000000000000000000000000000000000000000000000000000c";
     expected += "4c6f72656d20697073756d2e0000000000000000000000000000000000000000";
 
-    std::string returned = Abi::encode("function(uint256,int256,string)", Types::uint256(42), Types::int256(-42),
-                                       Types::string("Lorem ipsum."));
+    std::string returned = Abi::encode("function(uint256,int256,string)", uint256(42), int256(-42),
+                                       string("Lorem ipsum."));
 
     EXPECT_EQ(expected, returned);
 
@@ -118,8 +118,8 @@ TEST(Abi_encode, shouldEncodeMixedTypes) {
     expected += "0000000000000000000000000000000000000000000000000000000000000004";
     expected += "5553445400000000000000000000000000000000000000000000000000000000";
 
-    returned = Abi::encode("swap(string,string,uint256)", Types::string("ETH"), Types::string("USDT"),
-                           Types::uint256(999999999));
+    returned = Abi::encode("swap(string,string,uint256)", string("ETH"), string("USDT"),
+                           uint256(999999999));
 
     EXPECT_EQ(expected, returned);
 }

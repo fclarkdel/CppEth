@@ -6,7 +6,7 @@
 #include <stdexcept>
 
 #include <CppEth/Format/Format.hpp>
-#include <CppEth/Types/Types.hpp>
+#include <CppEth/Types.hpp>
 
 namespace CppEth::Abi {
     namespace Implementation {
@@ -21,13 +21,13 @@ namespace CppEth::Abi {
         }
 
         template<>
-        std::tuple<Types::uint256> decodeElement(size_t index, std::string_view encoding);
+        std::tuple<uint256> decodeElement(size_t index, std::string_view encoding);
 
         template<>
-        std::tuple<Types::int256> decodeElement(size_t index, std::string_view encoding);
+        std::tuple<int256> decodeElement(size_t index, std::string_view encoding);
 
         template<>
-        std::tuple<Types::string> decodeElement(size_t index, std::string_view encoding);
+        std::tuple<string> decodeElement(size_t index, std::string_view encoding);
 
         template<typename Element, typename ...Elements>
         std::tuple<Element, Elements...> decodeElements(size_t index, std::string_view encoding) {
@@ -51,13 +51,13 @@ namespace CppEth::Abi {
         }
 
         template<>
-        std::string encodeArgumentHead(Types::uint256 argument);
+        std::string encodeArgumentHead(uint256 argument);
 
         template<>
-        std::string encodeArgumentHead(Types::int256 argument);
+        std::string encodeArgumentHead(int256 argument);
 
         template<>
-        std::string encodeArgumentHead(Types::string argument);
+        std::string encodeArgumentHead(string argument);
 
         template<typename Element, typename ...Elements>
         std::string argumentEncodingHead(Element argument, Elements... arguments) {
@@ -77,13 +77,13 @@ namespace CppEth::Abi {
         }
 
         template<>
-        std::string encodeArgumentTail(std::string encoding, size_t index, Types::uint256 argument);
+        std::string encodeArgumentTail(std::string encoding, size_t index, uint256 argument);
 
         template<>
-        std::string encodeArgumentTail(std::string encoding, size_t index, Types::int256 argument);
+        std::string encodeArgumentTail(std::string encoding, size_t index, int256 argument);
 
         template<>
-        std::string encodeArgumentTail(std::string encoding, size_t index, Types::string argument);
+        std::string encodeArgumentTail(std::string encoding, size_t index, string argument);
 
         template<typename Element, typename ...Elements>
         std::string argumentEncodingTail(std::string encoding, size_t index, Element argument, Elements... arguments){
