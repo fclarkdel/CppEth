@@ -22,16 +22,16 @@ std::future<std::string>
 Node::eth_call(const std::string& to, const std::string& data)
 {
 	std::string params = R"([{"to":")";
-	params += (to);
+	params += to;
 	params += R"(", "data":")";
 	params += data;
-	params += R"("}, "safe"])";
+	params += R"("}, "latest"])";
 
-	return json_rpc_server.batch_request("eth_call", params);
+	return json_rpc_server.batch_request("eth_call", params, [](const std::string& json){return daw::json::from_json<std::string>(json, "result");});
 }
 void
 Node::send_requests()
 {
-	json_rpc_server.execute_batch();
+	json_rpc_server.send_batch();
 }
 }

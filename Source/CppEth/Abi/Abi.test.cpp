@@ -5,18 +5,18 @@
 
 using namespace CppEth;
 
-TEST(Abi_decode, shouldBePrefixInsensitive) {
+TEST(Abi_decode, should_be_prefix_insensitive) {
     std::tuple expected = {uint256(42), int256(-42)};
 
-    std::string unprefixedEncoding;
-    unprefixedEncoding += "000000000000000000000000000000000000000000000000000000000000002a";
-    unprefixedEncoding += "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd6";
+    std::string unprefixed_encoding;
+    unprefixed_encoding += "000000000000000000000000000000000000000000000000000000000000002a";
+    unprefixed_encoding += "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd6";
 
-    std::tuple returned = Abi::decode<uint256, int256>(unprefixedEncoding);
+    std::tuple returned = Abi::decode<uint256, int256>(unprefixed_encoding);
 
     EXPECT_EQ(expected, returned);
 
-    std::string prefixedEncoding = "0x" + unprefixedEncoding;
+    std::string prefixedEncoding = "0x" + unprefixed_encoding;
 
     returned = Abi::decode<uint256, int256>(prefixedEncoding);
 
@@ -70,6 +70,15 @@ TEST(Abi_encode, shouldEncodeFunctionSignature) {
     std::string returned = Abi::encode("function()");
 
     EXPECT_EQ(expected, returned);
+}
+
+TEST(Abi_encode, shouldEncodeWithNoFunctionSignature) {
+	std::string expected = "0x";
+	expected += "000000000000000000000000000000000000000000000000000000000000002a";
+
+	std::string returned = Abi::encode<CppEth::uint256>("", 42);
+
+	EXPECT_EQ(expected, returned);
 }
 
 TEST(Abi_encode, shouldEncodeStaticTypes) {
