@@ -21,6 +21,9 @@ public:
 	std::future<std::string>
 	eth_call(const std::string& to, const std::string& data);
 
+	std::future<std::string>
+	eth_blockNumber();
+
 	void
 	send_requests();
 

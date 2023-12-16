@@ -17,4 +17,10 @@ TEST(Node, development)
 
 	for(auto& future: futures)
 		std::cout << future.get() << '\n';
+
+	auto future = node.eth_blockNumber();
+
+	node.send_requests();
+
+	std::cout << future.get() << std::endl;
 }

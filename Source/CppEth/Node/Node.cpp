@@ -27,7 +27,16 @@ Node::eth_call(const std::string& to, const std::string& data)
 	params += data;
 	params += R"("}, "latest"])";
 
-	return json_rpc_server.batch_request("eth_call", params, [](const std::string& json){return daw::json::from_json<std::string>(json, "result");});
+	return json_rpc_server.batch_request("eth_call", params, [](const std::string& json) {
+		return daw::json::from_json<std::string>(json, "result");
+	});
+}
+std::future<std::string>
+Node::eth_blockNumber()
+{
+	return json_rpc_server.batch_request("eth_blockNumber", "[]", [](const std::string& json) {
+		return daw::json::from_json<std::string>(json, "result");
+	});
 }
 void
 Node::send_requests()
