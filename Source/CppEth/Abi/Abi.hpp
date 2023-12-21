@@ -35,6 +35,14 @@ template<>
 std::tuple<string>
 decodeElement(size_t index, std::string_view encoding);
 
+template<>
+std::tuple<address>
+decodeElement(size_t index, std::string_view encoding);
+
+template<>
+std::tuple<std::vector<address>>
+decodeElement(size_t index, std::string_view encoding);
+
 template<typename Element, typename... Elements>
 std::tuple<Element, Elements...>
 decodeElements(size_t index, std::string_view encoding)
@@ -72,6 +80,14 @@ template<>
 std::string
 encodeArgumentHead(string argument);
 
+template<>
+std::string
+encodeArgumentHead(address argument);
+
+template<>
+std::string
+encodeArgumentHead(std::vector<address> argument);
+
 template<typename Element, typename... Elements>
 std::string
 argumentEncodingHead(Element argument, Elements... arguments)
@@ -103,6 +119,14 @@ encodeArgumentTail(std::string encoding, size_t index, int256 argument);
 template<>
 std::string
 encodeArgumentTail(std::string encoding, size_t index, string argument);
+
+template<>
+std::string
+encodeArgumentTail(std::string encoding, size_t index, address argument);
+
+template<>
+std::string
+encodeArgumentTail(std::string encoding, size_t index, std::vector<address> argument);
 
 template<typename Element, typename... Elements>
 std::string
